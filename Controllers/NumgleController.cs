@@ -32,7 +32,7 @@ namespace Numgle.Controllers
                                            { "", "", "「프", "「굔", "l쿈", "「뇬|", "묜", "뚄", "", "숀", "", "욘", "숀|", "쿈|", "숀|-", "=뇬l", "쑌", "뵨", "욘|-" },
                                            { "⇲", "", "ㄷ", "「그", "日", "Ṉ", "므", "뜨", "", "≥", "", "으", "≥|", "킈", "≥|-", "=늬", "쓰", "브", "의-" }
                                          };
-        private string[] converted_han = { "J", "ᖵ", "⋝'", "r", "5ı", "δ˫", "n", "Д", "ru", "「늬", "「님", "ꈉ'", "ꉱ", "", "ꂚ˫", "ㅁ", "ㄸ", "뚠", "⪚", ">", "ᕒ", "ㅇ", "ꓘ", "ᕒ|", "ꓘ-", "ㅚ", "m", "ㅒ", "아", "ㅜ", "工", "ㅠ", "ㅍ", "ㅗ", "〧", "ㅛ", "", "ㅏ", "ᅷ", "左", "上", "ㅑ", "ㅓ", "ᅺ", "", "ᅼ", "ㅕ", "l", "⊥", "ㅡ" };
+        private string[] converted_han = { "J", "ᖵ", "⋝'", "r", "5ı", "δ˫", "n", "Д", "ru", "「늬", "「님", "ꈉ'", "ꉱ", "", "", "ꂚ˫", "ㅁ", "ㄸ", "뚠", "⪚", ">", "ᕒ", "ㅇ", "ꓘ", "ᕒ|", "ꓘ-", "ㅚ", "m", "ㅒ", "아", "ㅜ", "工", "ㅠ", "ㅍ", "ㅗ", "〧", "ㅛ", "", "ㅏ", "ᅷ", "左", "上", "ㅑ", "ㅓ", "ᅺ", "", "ᅼ", "ㅕ", "l", "⊥", "ㅡ" };
         private string[] converted_english = { "ᗆ", "ϖ", "∩", "ᗜ", "m", "ㄲ", "ᘏ", "工", "ㅡ", "(__", "ㅈ", "┌-", "ᕒ", "Z", "O", "‾ᗜ", ",O", "7ᗜ", "∽", "-ㅓ", "⊂", "<", "ε", "X", "-<", "N" };
         private string[] converted_number = { "o", "ㅡ", "ru", "ω", "-F", "UT", "0‾‾", "__|", "∞", "__0" };
         private string[] converted_special = { "·-J", "·ㅡ", ".", ">", "ㅣ" };
@@ -77,7 +77,7 @@ namespace Numgle.Controllers
                 }
 
                 case LetterType.NotCompleteHangul:
-                    return converted_han[input - 3131];
+                    return converted_han[input - 0x3131];
 
                 case LetterType.English:
                     return converted_english[input - 65];
@@ -111,7 +111,7 @@ namespace Numgle.Controllers
         {
             if (letter == ' ' || letter == '\r' || letter == '\n') return LetterType.Empty;
             else if (letter >= 44032 && letter <= 55203) return LetterType.CompleteHangul;
-            else if (letter >= 3131 && letter <= 3163) return LetterType.NotCompleteHangul;
+            else if (letter >= 0x3131 && letter <= 0x3163) return LetterType.NotCompleteHangul;
             else if (letter >= 65 && letter <= 90) return LetterType.English;
             else if (letter >= 48 && letter <= 57) return LetterType.Number;
             else if ("?!.^-".Contains(letter)) return LetterType.SpecialLetter;
