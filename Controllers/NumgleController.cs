@@ -32,8 +32,9 @@ namespace Numgle.Controllers
                                            { "", "", "「프", "「굔", "l쿈", "「뇬|", "묜", "뚄", "", "숀", "", "욘", "숀|", "쿈|", "숀|-", "=뇬l", "쑌", "뵨", "욘|-" },
                                            { "⇲", "", "ㄷ", "「그", "日", "Ṉ", "므", "뜨", "", "≥", "", "으", "≥|", "킈", "≥|-", "=늬", "쓰", "브", "의-" }
                                          };
-        private string[] converted_han = { "J", "ᖵ", "⋝'", "r", "5ı", "δ˫", "n", "Д", "ru", "「늬", "「님", "ꈉ'", "ꉱ", "", "ꂚ˫", "ㅁ", "ㄸ", "뚠", "⪚", ">", "ᕒ", "ㅇ", "ꓘ", "ᕒ|", "ꓘ-", "ㅚ", "m", "ㅒ", "아", "ㅜ", "工", "ㅠ", "ㅍ", "ㅗ", "〧", "ㅛ", "", "ㅏ", "ᅷ", "左", "上", "ㅑ", "ㅓ", "ᅺ", "", "ᅼ", "ㅕ", "l", "⊥", "ㅡ" };
-        private string[] converted_english = { "ᗆ", "ϖ", "∩", "ᗜ", "m", "ㄲ", "ᘏ", "工", "ㅡ", "(__", "ㅈ", "┌-", "ᕒ", "Z", "O", "‾ᗜ", ",O", "7ᗜ", "∽", "-ㅓ", "⊂", "<", "ε", "X", "-<", "N" };
+        private string[] converted_han = { "J", "ᖵ", "⋝'", "r", "5ı", "δ˫", "n", "Д", "ru", "「늬", "「님", "ꈉ'", "⪞", "ꉱ", "", "ꂚ˫", "ㅁ", "ㄸ", "뚠", "⪚", ">", "ᕒ", "ㅇ", "ꓘ", "ᕒ|", "ꓘ-", "ㅚ", "m", "ㅒ", "아", "ㅜ", "工", "ㅠ", "ㅍ", "ㅗ", "〧", "ㅛ", "", "ㅏ", "ᅷ", "左", "上", "ㅑ", "ㅓ", "ᅺ", "", "ᅼ", "ㅕ", "l", "⊥", "ㅡ" };
+        private string[] converted_english_upper = { "ᗆ", "ϖ", "∩", "ᗜ", "m", "ㄲ", "ᘏ", "工", "ㅡ", "(__", "ㅈ", "┌-", "ᕒ", "Z", "O", "‾ᗜ", ",O", "7ᗜ", "∽", "-ㅓ", "⊂", "<", "ꗨ", "X", "-<", "N" };
+        private string[] converted_english_lower = { "ჹ", "ᓂ", "ᴒ", "ᓇ", "ര", "Ⴕ", "ڡ", "ፓ", "-·", "ㄴ.", "ㅈ", "ㅡ", "ᴟ", "ᴝ", "o", "ᓀ", "ᓄ", "ㄱ", "ᔥ", "-+", "ㄷ", "<", "ꗨ", "x", "ﻋ", "ᴺ" };
         private string[] converted_number = { "o", "ㅡ", "ru", "ω", "-F", "UT", "0‾‾", "__|", "∞", "__0" };
         private string[] converted_special = { "·-J", "·ㅡ", ".", ">", "ㅣ" };
         #endregion
@@ -77,10 +78,13 @@ namespace Numgle.Controllers
                 }
 
                 case LetterType.NotCompleteHangul:
-                    return converted_han[input - 3131];
+                    return converted_han[input - 0x3131];
 
-                case LetterType.English:
-                    return converted_english[input - 65];
+                case LetterType.EnglishUpper:
+                    return converted_english_upper[input - 65];
+
+                case LetterType.EnglishLower:
+                    return converted_english_lower[input - 97];
 
                 case LetterType.Number:
                     return converted_number[input - 48];
@@ -102,7 +106,7 @@ namespace Numgle.Controllers
 
         public bool IsInData(int cho_num, int jung_num, int jong_num)
         {
-            if (jong_num == 0 || converted_jong[jong_num] != "") return true;
+            if (jong_num != 0 && converted_jong[jong_num] == "") return false;
             if (jung_num >= 8 && jung_num != 20) return converted_jung[jung_num - 8] != "";
             else return converted_cj[Math.Min(8, jung_num), cho_num] != "";
         }
@@ -111,8 +115,9 @@ namespace Numgle.Controllers
         {
             if (letter == ' ' || letter == '\r' || letter == '\n') return LetterType.Empty;
             else if (letter >= 44032 && letter <= 55203) return LetterType.CompleteHangul;
-            else if (letter >= 3131 && letter <= 3163) return LetterType.NotCompleteHangul;
-            else if (letter >= 65 && letter <= 90) return LetterType.English;
+            else if (letter >= 0x3131 && letter <= 0x3163) return LetterType.NotCompleteHangul;
+            else if (letter >= 65 && letter <= 90) return LetterType.EnglishUpper;
+            else if (letter >= 97 && letter <= 122) return LetterType.EnglishLower;
             else if (letter >= 48 && letter <= 57) return LetterType.Number;
             else if ("?!.^-".Contains(letter)) return LetterType.SpecialLetter;
             else return LetterType.Unknown;
@@ -124,7 +129,8 @@ namespace Numgle.Controllers
         Empty,
         CompleteHangul,
         NotCompleteHangul,
-        English,
+        EnglishUpper,
+        EnglishLower,
         Number,
         SpecialLetter,
         Unknown
