@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "a7vOMI7auXszZef2Nl4RCCEznEN29Vv/KFssO+R8ClcHCCqBmlPWA9WZy4OnTeJFS15mUHTWvnMLgacBRXaaVQ==",
+  "dgSpecHash": "ZTpR3TGHKhiV4hgafbjIYpztXWAtyUVpoY7mS0Rc/Ut57uZ+uten6kxY4gCOfbtKqPxduZy7vq/87rukbdZJnA==",
   "success": true,
   "projectFilePath": "C:\\Users\\krkr2\\OneDrive\\바탕 화면\\Numgle\\Numgle\\Numgle.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\krkr2\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

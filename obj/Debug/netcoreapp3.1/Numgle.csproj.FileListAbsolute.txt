@@ -19,3 +19,5 @@ C:\Users\krkr2\OneDrive\바탕 화면\Numgle\Numgle\obj\Debug\netcoreapp3.1\Numg
 C:\Users\krkr2\OneDrive\바탕 화면\Numgle\Numgle\obj\Debug\netcoreapp3.1\Numgle.dll
 C:\Users\krkr2\OneDrive\바탕 화면\Numgle\Numgle\obj\Debug\netcoreapp3.1\Numgle.pdb
 C:\Users\krkr2\OneDrive\바탕 화면\Numgle\Numgle\obj\Debug\netcoreapp3.1\Numgle.genruntimeconfig.cache
+C:\Users\krkr2\OneDrive\바탕 화면\Numgle\Numgle\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\krkr2\OneDrive\바탕 화면\Numgle\Numgle\obj\Debug\netcoreapp3.1\Numgle.csproj.CopyComplete
